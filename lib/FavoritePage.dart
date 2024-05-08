@@ -22,27 +22,29 @@ class FavoritePage extends StatelessWidget {
           itemCount: stores.length,
           itemBuilder: (context, index) {
             final store = stores[index];
-            return ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(store.photoLink),
-              ),
-              title: Text(
-                store.name,
-                style: TextStyle(
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold,
+            return Card(
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(store.photoLink),
                 ),
-              ),
-              trailing: IconButton(
-                icon: provider.exists(store)
-                    ? const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      )
-                    : const Icon(Icons.favorite_border),
-                onPressed: () {
-                  provider.toggleFavorite(store);
-                },
+                title: Text(
+                  store.name,
+                  style: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                trailing: IconButton(
+                  icon: provider.exists(store)
+                      ? const Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        )
+                      : const Icon(Icons.favorite_border),
+                  onPressed: () {
+                    provider.toggleFavorite(store);
+                  },
+                ),
               ),
             );
           },
