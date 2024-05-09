@@ -13,7 +13,7 @@ class FavoritePage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.orange.shade300,
           toolbarHeight: 80,
-          title: Text(
+          title: const Text(
             "Favorites",
             style: TextStyle(fontSize: 50, fontFamily: 'Pacifico'),
           ),
@@ -29,7 +29,7 @@ class FavoritePage extends StatelessWidget {
                 ),
                 title: Text(
                   store.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 19,
                     fontWeight: FontWeight.bold,
                   ),
