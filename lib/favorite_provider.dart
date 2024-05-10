@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stores_application/model/store.dart';
-import 'package:stores_application/screens/sql_database.dart';
+import 'package:stores_application/model/sql_database.dart';
 
 class FavoriteProvider extends ChangeNotifier {
-  // get all favorite stores for current user then add them into stores then notifylisteners
+  // get all favorite stores for current user then add them into stores then notify listeners
 
   List<Store> stores = [];
 

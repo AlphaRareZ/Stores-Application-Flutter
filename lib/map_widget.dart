@@ -12,7 +12,6 @@ class DistanceMapWidget extends StatefulWidget {
 }
 
 class _DistanceMapWidgetState extends State<DistanceMapWidget> {
-  late GoogleMapController _mapController;
   Set<Marker> _markers = {};
   PolylinePoints _polylinePoints = PolylinePoints();
   final List<LatLng> _polylineCoordinates = [];

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:stores_application/model/user.dart';
-import 'package:stores_application/screens/sql_database.dart';
+import '../model/sql_database.dart';
 
 import '../style/style.dart';
 
 class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
+
   @override
   State<SignupScreen> createState() => _SignupScreenState();
 }
@@ -33,45 +34,30 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     final SQLDatabase database = SQLDatabase();
-    bool _validateEmail(String value) {
-      final RegExp emailRegex =
-          RegExp(r'^[a-zA-Z0-9._%+-]+@stud\.fci-cu\.edu\.eg$');
 
-      if (!emailRegex.hasMatch(value)) {
-        return false;
-      }
-      return true;
-    }
 
-    bool _isMatchPasswors(String value) {
-      return true;
-    }
-
-    bool _isFciEmail(String value) {
+    bool isFciEmail(String value) {
       // omar@stud.fci-cu.edu.eg
       RegExp regex = RegExp(r'^[a-zA-Z0-9._%+-]+@stud\.fci-cu\.edu\.eg$');
       return regex.hasMatch(value);
     }
 
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        elevation: 0,
+        backgroundColor: Colors.cyan,
+        toolbarHeight: 80,
         title: const Text(
-          "Sign UP",
+          "SignUp",
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+              fontSize: 30, fontFamily: 'Pacifico', color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -81,6 +67,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     if (e!.isEmpty) {
                       return "Please enter your name!";
                     }
+                    return null;
                   },
                   decoration: buildInputDecoration(
                     labelText: 'Name*',
@@ -130,7 +117,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please enter your email';
-                    } else if (!_isFciEmail(value)) {
+                    } else if (!isFciEmail(value)) {
                       return 'Please enter a valid FCI email';
                     }
                     return null;
@@ -181,12 +168,13 @@ class _SignupScreenState extends State<SignupScreen> {
                     if (e != passwordController.text) {
                       return "Not Match the password!";
                     }
+                    return null;
                   },
                 ),
                 const SizedBox(height: 20.0),
                 ElevatedButton(
                   onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
+                    if (formKey.currentState!.validate()) {
                       print("Sign Up Form Submitted");
 
                       bool exists =

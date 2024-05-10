@@ -1,10 +1,7 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:stores_application/screens/sql_database.dart';
 import 'package:stores_application/main.dart';
 import 'package:stores_application/screens/stores_screen.dart';
+import 'package:stores_application/model/sql_database.dart';
 import 'signup_screen.dart';
 import '../style/style.dart';
 
@@ -26,25 +23,19 @@ class _LoginScreenState extends State<LoginScreen> {
     return regex.hasMatch(value);
   }
 
-  // bool _isMatchPasswords(String value) {
-  //   return true;
-  // }
-
   @override
   Widget build(BuildContext context) {
     final SQLDatabase database = SQLDatabase();
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.cyan,
         elevation: 0,
+        toolbarHeight: 80,
         title: const Text(
           "Login",
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+              color: Colors.white, fontSize: 30, fontFamily: 'Pacifico'),
         ),
       ),
       body: SingleChildScrollView(
@@ -100,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      print("Sign in Form Submitted");
+                      // print("Sign in Form Submitted");
                       List<Map> response = await database.emailAndPassExists(
                           emailController.text, passwordController.text);
                       // print(response);
@@ -110,18 +101,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         currentUser.gender = response[0]['gender'];
                         currentUser.email = response[0]['email'];
                         currentUser.password = response[0]['password'];
+
+                        // ignore: use_build_context_synchronously
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (context) {
+                          return const StoresPage();
+                        }));
+
+                        // print(currentUser.id);
+                        // print(currentUser.name);
+                        // print(currentUser.gender);
+                        // print(currentUser.email);
+                        // print(currentUser.password);
+                      } else {
+                        // print("Email Does Not Exist");
                       }
-                      var res = await database.readData("select * from stores");
-                      print(res);
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) {
-                        return StoresPage();
-                      }));
-                      print(currentUser.id);
-                      print(currentUser.name);
-                      print(currentUser.gender);
-                      print(currentUser.email);
-                      print(currentUser.password);
                     }
                   },
                   child: const Text('Login',
@@ -138,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SignupScreen()));
+                              builder: (context) => const SignupScreen()));
                         },
                         child: const Text('Register',
                             style: TextStyle(

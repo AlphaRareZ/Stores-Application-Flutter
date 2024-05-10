@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stores_application/FavoriteProvider.dart';
+import 'package:stores_application/favorite_provider.dart';
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({super.key});
@@ -11,11 +11,12 @@ class FavoritePage extends StatelessWidget {
     final stores = provider.stores;
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.orange.shade300,
+          backgroundColor: Colors.cyan,
           toolbarHeight: 80,
           title: const Text(
             "Favorites",
-            style: TextStyle(fontSize: 50, fontFamily: 'Pacifico'),
+            style: TextStyle(
+                fontSize: 30, fontFamily: 'Pacifico', color: Colors.white),
           ),
         ),
         body: ListView.builder(

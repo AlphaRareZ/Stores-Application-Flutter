@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: avoid_print
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/utils/utils.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:stores_application/main.dart';
 import 'package:stores_application/model/store.dart';
@@ -17,7 +17,7 @@ class SQLDatabase {
   initialDB() async {
     String dbPath = await getDatabasesPath();
     String path = join(dbPath, 'dog.db');
-    print(path);
+    // print(path);
     Database database =
         await openDatabase(path, onCreate: _onCreate, version: 1);
     return database;
@@ -87,7 +87,6 @@ class SQLDatabase {
   }
 
   void addUser(User user) async {
-    Database? mydb = await db;
     String name = user.name;
     String gender = user.gender;
     String email = user.email;
