@@ -40,12 +40,14 @@ class SQLDatabase {
       lat real,
       lon real,
       photolink text
-    );''');
+    );
+    ''');
     await db.execute('''
     Create table Favorite_Stores(
       uid integer,
       sid integer
-    );''');
+    );
+    ''');
   }
 
   readData(String sql) async {
@@ -87,10 +89,10 @@ class SQLDatabase {
   }
 
   void addUser(User user) async {
-    String name = user.name;
-    String gender = user.gender;
-    String email = user.email;
-    String password = user.password;
+    String? name = user.name;
+    String? gender = user.gender;
+    String? email = user.email;
+    String? password = user.password;
 
     await insertData(
         "insert into users('name','gender','email','password') values ('$name','$gender','$email','$password')");
@@ -145,7 +147,6 @@ class SQLDatabase {
   void addFavoriteStore(int id) async {
     int? currUID = currentUser.id;
     await insertData(
-        "insert into favorite_stores ('uid','sid') values($currUID,$id)");
-    print("added to favorites successfully $currUID $id");
+        "insert into favorite_stores ('uid','sid') values( $currUID, $id)");
   }
 }

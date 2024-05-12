@@ -1,6 +1,6 @@
 class User {
   int? id;
-  late String name, gender, email, password;
+  String? name, gender, email, password;
 
   User(
     this.id, {

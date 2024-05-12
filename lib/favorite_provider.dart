@@ -31,10 +31,7 @@ class FavoriteProvider extends ChangeNotifier {
   bool exists(Store store) {
     bool exists = false;
     for (var x in stores) {
-      if (x.name == store.name &&
-          x.latitude == store.latitude &&
-          x.longitude == store.longitude &&
-          x.photoLink == store.photoLink) {
+      if (x.id==store.id) {
         exists = true;
         break;
       }
