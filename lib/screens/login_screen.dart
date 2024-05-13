@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         currentUser.gender = response[0]['gender'];
                         currentUser.email = response[0]['email'];
                         currentUser.password = response[0]['password'];
-
+                        // database.insertStores();
                         // ignore: use_build_context_synchronously
                         Navigator.of(context).pushReplacement(
                             MaterialPageRoute(builder: (context) {

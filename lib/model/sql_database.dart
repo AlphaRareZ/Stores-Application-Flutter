@@ -17,7 +17,7 @@ class SQLDatabase {
   initialDB() async {
     String dbPath = await getDatabasesPath();
     String path = join(dbPath, 'dog.db');
-    // print(path);
+    print(path);
     Database database =
         await openDatabase(path, onCreate: _onCreate, version: 1);
     return database;
@@ -148,5 +148,20 @@ class SQLDatabase {
     int? currUID = currentUser.id;
     await insertData(
         "insert into favorite_stores ('uid','sid') values( $currUID, $id)");
+  }
+
+  void insertStores() async {
+    await insertData('''
+    insert into stores ('name','lat','lon','photolink') values
+    ('Al Yemen Al Saeed',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172'),
+    ('Abu Shaqra',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172'),
+    ('Konafa We Basbosa',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172'),
+    ('Qasr El Mandy',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172'),
+    ('BIM',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172'),
+    ('Chickana',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172'),
+    ('Franco Cafe',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172'),
+    ('Safari Restaurant',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172'),
+    ('El Refa3y',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172')
+  ''');
   }
 }
