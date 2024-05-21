@@ -16,7 +16,7 @@ class SQLDatabase {
 
   initialDB() async {
     String dbPath = await getDatabasesPath();
-    String path = join(dbPath, 'dog.db');
+    String path = join(dbPath, 'stores_application2.db');
     print(path);
     Database database =
         await openDatabase(path, onCreate: _onCreate, version: 1);
@@ -76,7 +76,7 @@ class SQLDatabase {
 
   myDeleteDatabase() async {
     String dbPath = await getDatabasesPath();
-    String path = join(dbPath, 'dog.db');
+    String path = join(dbPath, 'stores_application2.db');
     deleteDatabase(path);
     print("DELETED SUCCESSFULLY");
   }
@@ -151,7 +151,10 @@ class SQLDatabase {
   }
 
   void insertStores() async {
-    await insertData('''
+    List<Map> stores = await readData("select name from stores");
+    if (stores.isEmpty) {
+      print("Inserting Stores");
+      await insertData('''
     insert into stores ('name','lat','lon','photolink') values
     ('Al Yemen Al Saeed',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172'),
     ('Abu Shaqra',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172'),
@@ -163,5 +166,10 @@ class SQLDatabase {
     ('Safari Restaurant',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172'),
     ('El Refa3y',30.013056,31.208853,'https://images.deliveryhero.io/image/talabat/Menuitems/3_1_2021-talabat-egy_637467532385486513.jpg?width=172&amp;height=172')
   ''');
+    }
+    else {
+      print("There is Already Stores in DB");
+    }
+
   }
 }

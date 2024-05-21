@@ -18,15 +18,15 @@ class StoresPage extends StatefulWidget {
 class _StoresPageState extends State<StoresPage> {
   List<Store> stores = [];
   List<Store> favStores = []; // Ensure this is initialized
-
+  SQLDatabase database = SQLDatabase();
   @override
   void initState() {
     super.initState();
+    database.insertStores();
     loadStores(); // Make sure currentUser.id is accessible here
   }
 
   Future<void> loadStores() async {
-    SQLDatabase database = SQLDatabase(); // Initialize once
     stores = await database.loadStores();
     favStores = await database.loadFavoriteStores(currentUser.id);
     // ignore: use_build_context_synchronously
